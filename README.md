@@ -1,12 +1,14 @@
-# List Builder
+# blocklists-feed
 
 There are many public blocklists online, but I could not find the exact shape I wanted for quick reuse.
 So this repo does one small job: fetch selected sources and write ready-to-use `hosts` files.
 
 ## What it creates
 
-- `adlists/cuii.hosts`
-- `adlists/combined.hosts`
+| File | Description |
+| --- | --- |
+| `adlists/cuii.hosts` | Hosts file generated from the https://cuiiliste.de/ list of blocked domains. |
+| `adlists/combined.hosts` | Combined hosts file. |
 
 Each line is in this format:
 
