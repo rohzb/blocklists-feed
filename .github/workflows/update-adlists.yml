@@ -9,26 +9,27 @@ permissions:
   contents: write
 
 jobs:
-  sync-and-build-adlists:
+  sync-adlists:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Sync and build configured adlist sources
+      - name: Sync configured adlist sources
         env:
           YALIC_IMAGE: ghcr.io/rohzb/yalic:latest
         run: |
           docker run --rm \
+            --user "$(id -u):$(id -g)" \
             -v "${GITHUB_WORKSPACE}:/work" \
             -w /work \
             "${YALIC_IMAGE}" \
-            sh -lc "yalic-pull -c /work/config/adlists.yaml && yalic-build -c /work/config/adlists.yaml"
+            yalic-pull -c /work/config/adlists.yaml
 
       - name: Commit changes
         run: |
-          git add -A adlists
+          git add -A adlists/upstream
 
           if git diff --cached --quiet; then
             echo "No changes"
@@ -39,5 +40,5 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(adlists): sync and rebuild artifacts ${TS_UTC} [skip ci]"
+          git commit -m "chore(adlists): sync upstream snapshots ${TS_UTC}"
           git push

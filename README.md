@@ -55,7 +55,7 @@ Target options for adlist outputs can be set in `targets`:
 
 - `hosts_sink_address` to set the destination/sink address used in `hosts` output
 
-Run adlist sync+build:
+Sync adlist upstream snapshots:
 
 ```bash
 ./scripts/update-adlists.sh
@@ -102,4 +102,5 @@ YALIC_IMAGE=ghcr.io/rohzb/yalic:latest ./scripts/update-blocklists.sh
 ## Automation
 
 GitHub Actions runs every 6 hours and on manual trigger.
-If generated outputs changed, it commits and pushes files under `feeds/`.
+Update workflows only refresh upstream snapshots. The rebuild workflow regenerates
+local result artifacts under `feeds/result/` and `adlists/result/`.

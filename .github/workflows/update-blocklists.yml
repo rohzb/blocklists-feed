@@ -21,6 +21,7 @@ jobs:
           YALIC_IMAGE: ghcr.io/rohzb/yalic:latest
         run: |
           docker run --rm \
+            --user "$(id -u):$(id -g)" \
             -v "${GITHUB_WORKSPACE}:/work" \
             -w /work \
             "${YALIC_IMAGE}" \

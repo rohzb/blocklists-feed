@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Sync then build adlist artifacts via YALIC.
+# Sync adlist upstream snapshots via YALIC.
 # Layout/output behavior is defined in config/adlists.yaml.
 
 set -euo pipefail
@@ -23,23 +23,20 @@ main() {
   if [[ "${YALIC_MODE}" == "docker" ]]; then
     require_cmd docker
     docker run --rm \
+      --user "$(id -u):$(id -g)" \
       -v "${REPO_ROOT}:/work" \
       -w /work \
       "${YALIC_IMAGE}" \
-      sh -lc "yalic-pull -c \"/work/${CONFIG_REL}\" && yalic-build -c \"/work/${CONFIG_REL}\""
+      yalic-pull -c "/work/${CONFIG_REL}"
   elif [[ "${YALIC_MODE}" == "local" ]]; then
     (
       cd -- "${REPO_ROOT}"
       if [[ "${YALIC_LOCAL_SOURCE}" == "1" ]]; then
         PYTHONPATH="${REPO_ROOT}/../../packages/yalic/src${PYTHONPATH:+:${PYTHONPATH}}" \
           python -c "from yalic.cli.v03 import main_pull; raise SystemExit(main_pull(['-c','${CONFIG_REL}']))"
-        PYTHONPATH="${REPO_ROOT}/../../packages/yalic/src${PYTHONPATH:+:${PYTHONPATH}}" \
-          python -c "from yalic.cli.v03 import main_build; raise SystemExit(main_build(['-c','${CONFIG_REL}']))"
       else
         require_cmd yalic-pull
-        require_cmd yalic-build
         yalic-pull -c "${CONFIG_REL}"
-        yalic-build -c "${CONFIG_REL}"
       fi
     )
   else

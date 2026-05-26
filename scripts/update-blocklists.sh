@@ -23,6 +23,7 @@ main() {
   if [[ "${YALIC_MODE}" == "docker" ]]; then
     require_cmd docker
     docker run --rm \
+      --user "$(id -u):$(id -g)" \
       -v "${REPO_ROOT}:/work" \
       -w /work \
       "${YALIC_IMAGE}" \
