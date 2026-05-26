@@ -23,7 +23,7 @@ jobs:
             -v "${GITHUB_WORKSPACE}:/work" \
             -w /work \
             "${YALIC_IMAGE}" \
-            yalic-build -c /work/config/yalic-v03.yaml
+            yalic-build -c /work/config/feeds.yaml
 
       - name: Commit changes
         run: |

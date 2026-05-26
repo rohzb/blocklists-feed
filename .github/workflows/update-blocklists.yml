@@ -24,7 +24,7 @@ jobs:
             -v "${GITHUB_WORKSPACE}:/work" \
             -w /work \
             "${YALIC_IMAGE}" \
-            yalic-pull -c /work/config/yalic-v03.yaml
+            yalic-pull -c /work/config/feeds.yaml
 
       - name: Commit changes
         run: |
