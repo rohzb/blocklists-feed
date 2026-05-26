@@ -96,7 +96,7 @@ YALIC_MODE=local YALIC_LOCAL_SOURCE=1 ./scripts/update-blocklists.sh
 Optional image override:
 
 ```bash
-YALIC_IMAGE=ghcr.io/rohzb/yalic:v0.3.1 ./scripts/update-blocklists.sh
+YALIC_IMAGE=ghcr.io/rohzb/yalic:latest ./scripts/update-blocklists.sh
 ```
 
 ## Automation

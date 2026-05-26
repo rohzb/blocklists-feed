@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
 
 YALIC_MODE="${YALIC_MODE:-docker}"
-YALIC_IMAGE="${YALIC_IMAGE:-ghcr.io/rohzb/yalic:v0.3.1}"
+YALIC_IMAGE="${YALIC_IMAGE:-ghcr.io/rohzb/yalic:latest}"
 YALIC_LOCAL_SOURCE="${YALIC_LOCAL_SOURCE:-0}"
 CONFIG_REL="config/feeds.yaml"
 

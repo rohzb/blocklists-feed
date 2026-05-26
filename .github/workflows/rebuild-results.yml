@@ -17,7 +17,7 @@ jobs:
 
       - name: Rebuild selected feeds from synced snapshots
         env:
-          YALIC_IMAGE: ghcr.io/rohzb/yalic:v0.3.2
+          YALIC_IMAGE: ghcr.io/rohzb/yalic:latest
         run: |
           docker run --rm \
             -v "${GITHUB_WORKSPACE}:/work" \
