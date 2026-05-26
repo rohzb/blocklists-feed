@@ -1,0 +1,42 @@
+name: Rebuild feed results
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild-results:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Rebuild selected feeds from synced snapshots
+        env:
+          YALIC_IMAGE: ghcr.io/rohzb/yalic:v0.3.2
+        run: |
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}:/work" \
+            -w /work \
+            "${YALIC_IMAGE}" \
+            yalic-build -c /work/config/yalic-v03.yaml
+
+      - name: Commit changes
+        run: |
+          git add -A feeds/result
+
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+
+          TS_UTC="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(feeds): rebuild result artifacts ${TS_UTC} [skip ci]"
+          git push

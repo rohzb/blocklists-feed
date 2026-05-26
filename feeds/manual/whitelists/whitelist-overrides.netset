@@ -1,0 +1,13 @@
+# whitelist-overrides.txt
+# Purpose:
+#   Local override allowlist for ranges that should be subtracted from the
+#   selected external blocklist build.
+#
+# Format:
+#   ipset-like plain text
+#   - '#' starts a comment
+#   - one IPv4/IPv6 CIDR or host address per line
+
+# GitHub web ranges to keep reachable
+140.82.121.0/24
+185.199.109.0/24

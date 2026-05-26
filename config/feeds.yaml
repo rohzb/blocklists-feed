@@ -1,0 +1,135 @@
+defaults:
+  timeout_seconds: 30
+  snapshots_dir: ../feeds/upstream
+  flat_result_dir: ../feeds/result
+  compact: true
+  allow_extra_addresses: 16
+  cover_prefix_v4: 24
+  bundle_max_bytes: 4095
+
+failure_policy:
+  source_fetch_failure:
+    use_previous_snapshot: true
+    max_snapshot_age: 72h
+
+sources:
+  - id: cybercrime
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/cybercrime.ipset
+    snapshot_name: cybercrime
+    tags: [malware, c2]
+    enabled: true
+
+  - id: c2_tracker
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/c2_tracker.ipset
+    snapshot_name: c2_tracker
+    tags: [malware, c2, frameworks]
+    enabled: true
+
+  - id: firehol_webclient
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/firehol_webclient.netset
+    snapshot_name: firehol_webclient
+    tags: [malware, webclient-denylist, aggregated]
+    enabled: true
+
+  - id: cta_cryptowall
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/cta_cryptowall.ipset
+    snapshot_name: cta_cryptowall
+    tags: [malware, ransomware, cryptowall, legacy-feed]
+    enabled: true
+
+  - id: feodo
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/feodo.ipset
+    snapshot_name: feodo
+    tags: [malware, trojan, feodo, c2]
+    enabled: true
+
+  - id: feodo_badips
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/feodo_badips.ipset
+    snapshot_name: feodo_badips
+    tags: [malware, trojan, feodo, c2]
+    enabled: true
+
+  - id: iblocklist_abuse_spyeye
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/iblocklist_abuse_spyeye.netset
+    snapshot_name: iblocklist_abuse_spyeye
+    tags: [malware, trojan, spyeye, c2, legacy-feed]
+    enabled: true
+
+  - id: iblocklist_abuse_zeus
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/iblocklist_abuse_zeus.netset
+    snapshot_name: iblocklist_abuse_zeus
+    tags: [malware, trojan, zeus, c2, legacy-feed]
+    enabled: true
+
+  - id: iblocklist_abuse_palevo
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/iblocklist_abuse_palevo.netset
+    snapshot_name: iblocklist_abuse_palevo
+    tags: [malware, trojan, palevo, c2, legacy-feed]
+    enabled: true
+
+  - id: iblocklist_malc0de
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/iblocklist_malc0de.netset
+    snapshot_name: iblocklist_malc0de
+    tags: [malware, malware-distribution, legacy-feed]
+    enabled: true
+
+  - id: vxvault
+    type: url
+    parser: ipset
+    url: https://iplists.firehol.org/files/vxvault.ipset
+    snapshot_name: vxvault
+    tags: [malware, malware-distribution]
+    enabled: true
+
+  - id: private_special
+    type: file
+    parser: ipset
+    path: ../feeds/manual/whitelists/whitelist-private-and-special.netset
+    tags: [whitelist, local, private-special]
+    enabled: true
+
+  - id: whitelist_overrides
+    type: file
+    parser: ipset
+    path: ../feeds/manual/whitelists/whitelist-overrides.netset
+    tags: [whitelist, local, overrides]
+    enabled: true
+
+targets:
+  - name: malware
+    include:
+      - tag:malware
+    subtract:
+      - tag:whitelist
+    outputs:
+      - netset
+      - mikrotik_bundle
+    families:
+      - ipv4
+      - ipv6
+    optimize: balanced
+    compact: true
+    allow_extra_addresses: 16
+    cover_prefix_v4: 24
+    bundle_max_bytes: 4095
+    address_list: malware

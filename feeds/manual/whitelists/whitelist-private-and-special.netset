@@ -1,0 +1,23 @@
+# whitelist-private-and-special.txt
+# Purpose:
+#   Networks and addresses that must never appear in the selected external
+#   threat blocklist output.
+#
+# Format:
+#   ipset-like plain text
+#   - '#' starts a comment
+#   - one IPv4/IPv6 CIDR or host address per line
+
+# RFC 1918 private IPv4 space
+10.0.0.0/8
+172.16.0.0/12
+192.168.0.0/16
+
+# Loopback and link-local IPv4
+127.0.0.0/8
+169.254.0.0/16
+
+# Loopback and local-only IPv6
+::1/128
+fc00::/7
+fe80::/10

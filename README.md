@@ -1,30 +1,76 @@
 # blocklists-feed
 
-There are many public blocklists online, but I could not find the exact shape I wanted for quick reuse.
-So this repo does one small job: fetch selected sources and write ready-to-use `hosts` files.
+This repository builds malware-focused upstream IP feeds into flat, directly usable output files.
+Most behavior (paths, chunk size, output mapping) is configured in YALIC via `config/feeds.yaml`.
 
-## What it creates
+## Directory Layout
 
-| File | Description |
-| --- | --- |
-| `adlists/cuii.hosts` | Hosts file generated from the https://cuiiliste.de/ list of blocked domains. |
-| `adlists/combined.hosts` | Combined hosts file. |
+- `config/`
+  - YALIC v0.3 config only (`config/feeds.yaml`)
+- `feeds/manual/`
+  - manually managed input lists (including whitelists)
+- `feeds/upstream/`
+  - downloaded upstream snapshot content and metadata
+- `feeds/result/`
+  - generated result files intended for direct consumption
+- `mikrotik/routeros/`
+  - RouterOS helper scripts for consuming YALIC outputs
 
-Each line is in this format:
+## Result Files
 
-```text
-0.0.0.0 example.com
+The build writes flat files into `feeds/result/`:
+
+- `malware.netset`
+- `malware.bundle/`
+  - `index.txt`
+  - `block-XXXX.ipset`
+
+After renaming targets/configs, older artifacts (for example `malware-feeds.*`)
+may still exist until the next build refreshes outputs.
+
+## RouterOS Bundle Consumer
+
+Use `mikrotik/routeros/yalic_bundle_update.rsc`
+to download and apply `malware.bundle` outputs from an HTTP/HTTPS endpoint.
+Bundle block lines are plain ipset/netset values, and `# ...` comments are
+allowed.
+
+Example on RouterOS:
+
+```routeros
+/import file-name=yalic_bundle_update.rsc
+$yalicBundleUpdate
 ```
 
-## Run locally
+Set `listName` and `bundleBaseUrl` inside the script before running.
 
-Requirements: `bash`, `curl`, `jq`, `awk`, `sort`
+## Run
+
+Docker mode:
 
 ```bash
-./scripts/update-adlists.sh
+./scripts/update-blocklists.sh
+```
+
+Local mode:
+
+```bash
+YALIC_MODE=local ./scripts/update-blocklists.sh
+```
+
+Local mode against repo-local YALIC source (without reinstalling into `.venv`):
+
+```bash
+YALIC_MODE=local YALIC_LOCAL_SOURCE=1 ./scripts/update-blocklists.sh
+```
+
+Optional image override:
+
+```bash
+YALIC_IMAGE=ghcr.io/rohzb/yalic:v0.3.1 ./scripts/update-blocklists.sh
 ```
 
 ## Automation
 
 GitHub Actions runs every 6 hours and on manual trigger.
-If generated files changed, it commits and pushes them.
+If generated outputs changed, it commits and pushes files under `feeds/`.
