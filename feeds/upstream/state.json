@@ -71,7 +71,7 @@
   },
   "private_special": {
     "content_path": "content/private_special-944334239dc81dbd53f9e9a8ce2da49e1e1bda60f298644f631b5248132b5514.txt",
-    "resolved_location": "/workspaces/cfg-pi-wizzy/upstream/blocklists-feed/feeds/manual/whitelists/whitelist-private-and-special.netset",
+    "resolved_location": "../feeds/manual/whitelists/whitelist-private-and-special.netset",
     "snapshot_hash": "944334239dc81dbd53f9e9a8ce2da49e1e1bda60f298644f631b5248132b5514",
     "source_id": "private_special",
     "updated_at": "2026-05-26T04:23:45.899127Z"
@@ -85,7 +85,7 @@
   },
   "whitelist_overrides": {
     "content_path": "content/whitelist_overrides-aea576b1a48389f93a0d83c63c7294c26894297fedc3fa3f3f21b3da45495df8.txt",
-    "resolved_location": "/workspaces/cfg-pi-wizzy/upstream/blocklists-feed/feeds/manual/whitelists/whitelist-overrides.netset",
+    "resolved_location": "../feeds/manual/whitelists/whitelist-overrides.netset",
     "snapshot_hash": "aea576b1a48389f93a0d83c63c7294c26894297fedc3fa3f3f21b3da45495df8",
     "source_id": "whitelist_overrides",
     "updated_at": "2026-05-26T04:23:45.916517Z"
