@@ -9,18 +9,22 @@ permissions:
   contents: write
 
 jobs:
-  update:
+  sync-and-build-adlists:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Install deps
-        run: sudo apt-get update && sudo apt-get install -y jq
-
-      - name: Build adlists
-        run: ./scripts/update-adlists.sh
+      - name: Sync and build configured adlist sources
+        env:
+          YALIC_IMAGE: ghcr.io/rohzb/yalic:v0.3.2
+        run: |
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}:/work" \
+            -w /work \
+            "${YALIC_IMAGE}" \
+            sh -lc "yalic-pull -c /work/config/adlists.yaml && yalic-build -c /work/config/adlists.yaml"
 
       - name: Commit changes
         run: |
@@ -35,5 +39,5 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(adlists): update hosts ${TS_UTC} [skip ci]"
+          git commit -m "chore(adlists): sync and rebuild artifacts ${TS_UTC} [skip ci]"
           git push

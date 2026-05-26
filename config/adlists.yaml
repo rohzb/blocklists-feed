@@ -1,0 +1,32 @@
+defaults:
+  timeout_seconds: 30
+  snapshots_dir: ../adlists/upstream
+  flat_result_dir: ../adlists/result
+
+failure_policy:
+  source_fetch_failure:
+    use_previous_snapshot: true
+    max_snapshot_age: 72h
+
+sources:
+  - id: cuii_domains_json
+    type: url
+    parser: json
+    url: https://api.cuiiliste.de/blocked_domains
+    snapshot_name: cuii_domains_json
+    parser_config:
+      json_item_key: domain
+    tags: [adlist, cuii]
+    enabled: true
+
+targets:
+  - name: cuii
+    include:
+      - tag:cuii
+    outputs:
+      - domainset
+      - hosts
+    families:
+      - domain
+    hosts_sink_address: 0.0.0.0
+    optimize: none

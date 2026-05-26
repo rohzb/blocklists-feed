@@ -1,18 +1,16 @@
 #!/usr/bin/env bash
-# Simple adlist updater: fetch CUII and write per-source and combined
-# hosts files into ./adlists.
+# Sync then build adlist artifacts via YALIC.
+# Layout/output behavior is defined in config/adlists.yaml.
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
-OUT_DIR="${REPO_ROOT}/adlists"
-TMP_DIR="$(mktemp -d)"
 
-cleanup() {
-  [[ -d "${TMP_DIR}" ]] && rm -rf -- "${TMP_DIR}"
-}
-trap cleanup EXIT
+YALIC_MODE="${YALIC_MODE:-docker}"
+YALIC_IMAGE="${YALIC_IMAGE:-ghcr.io/rohzb/yalic:v0.3.1}"
+YALIC_LOCAL_SOURCE="${YALIC_LOCAL_SOURCE:-0}"
+CONFIG_REL="config/adlists.yaml"
 
 require_cmd() {
   command -v "$1" >/dev/null 2>&1 || {
@@ -21,43 +19,33 @@ require_cmd() {
   }
 }
 
-# Keep only reasonable domain-like entries to avoid bad lines polluting output.
-normalize_domains() {
-  awk '
-    {
-      line = tolower($0)
-      gsub(/^[[:space:]]+|[[:space:]]+$/, "", line)
-      if (line == "" || line ~ /^#/) next
-      if (line ~ /^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/) print line
-    }
-  '
-}
-
-domains_to_hosts() {
-  awk '{print "0.0.0.0 " $1}'
-}
-
 main() {
-  require_cmd curl
-  require_cmd jq
-  require_cmd awk
-  require_cmd sort
-
-  mkdir -p -- "${OUT_DIR}"
-
-  curl -fsSL 'https://api.cuiiliste.de/blocked_domains' \
-    | jq -r '.[].domain' \
-    | normalize_domains \
-    | sort -u >"${TMP_DIR}/cuii.domains"
-
-  cat "${TMP_DIR}/cuii.domains" | domains_to_hosts >"${OUT_DIR}/cuii.hosts"
-
-  cat "${TMP_DIR}/cuii.domains" \
-    | sort -u \
-    | domains_to_hosts >"${OUT_DIR}/combined.hosts"
-
-  printf 'Updated: %s\n' "${OUT_DIR}/cuii.hosts"
-  printf 'Updated: %s\n' "${OUT_DIR}/combined.hosts"
+  if [[ "${YALIC_MODE}" == "docker" ]]; then
+    require_cmd docker
+    docker run --rm \
+      -v "${REPO_ROOT}:/work" \
+      -w /work \
+      "${YALIC_IMAGE}" \
+      sh -lc "yalic-pull -c \"/work/${CONFIG_REL}\" && yalic-build -c \"/work/${CONFIG_REL}\""
+  elif [[ "${YALIC_MODE}" == "local" ]]; then
+    (
+      cd -- "${REPO_ROOT}"
+      if [[ "${YALIC_LOCAL_SOURCE}" == "1" ]]; then
+        PYTHONPATH="${REPO_ROOT}/../../packages/yalic/src${PYTHONPATH:+:${PYTHONPATH}}" \
+          python -c "from yalic.cli.v03 import main_pull; raise SystemExit(main_pull(['-c','${CONFIG_REL}']))"
+        PYTHONPATH="${REPO_ROOT}/../../packages/yalic/src${PYTHONPATH:+:${PYTHONPATH}}" \
+          python -c "from yalic.cli.v03 import main_build; raise SystemExit(main_build(['-c','${CONFIG_REL}']))"
+      else
+        require_cmd yalic-pull
+        require_cmd yalic-build
+        yalic-pull -c "${CONFIG_REL}"
+        yalic-build -c "${CONFIG_REL}"
+      fi
+    )
+  else
+    printf 'Invalid YALIC_MODE: %s (expected docker or local)\n' "${YALIC_MODE}" >&2
+    exit 2
+  fi
 }
 
 main "$@"

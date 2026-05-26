@@ -1,0 +1,9 @@
+{
+  "cuii_domains_json": {
+    "content_path": "/workspaces/cfg-pi-wizzy/upstream/blocklists-feed/adlists/upstream/content/cuii_domains_json-f44ab46835967cc5e01dab08ad9793a1c4cbfb3bb6dd1420c19ecbc4151630d9.txt",
+    "resolved_location": "https://api.cuiiliste.de/blocked_domains",
+    "snapshot_hash": "f44ab46835967cc5e01dab08ad9793a1c4cbfb3bb6dd1420c19ecbc4151630d9",
+    "source_id": "cuii_domains_json",
+    "updated_at": "2026-05-26T11:02:26.526615Z"
+  }
+}
