@@ -1,9 +1,9 @@
 {
   "cuii_domains_json": {
-    "content_path": "content/cuii_domains_json-8ce509b3c3bf3411d92ed0d21f3f3204de9a895a4d140a14c8c12f18cb9b4212.txt",
+    "content_path": "content/cuii_domains_json-ed354502d38345c45a4b095503978bbd00f17a4ef1cf8933c730cf2ab41b20b9.txt",
     "resolved_location": "https://api.cuiiliste.de/blocked_domains",
-    "snapshot_hash": "8ce509b3c3bf3411d92ed0d21f3f3204de9a895a4d140a14c8c12f18cb9b4212",
+    "snapshot_hash": "ed354502d38345c45a4b095503978bbd00f17a4ef1cf8933c730cf2ab41b20b9",
     "source_id": "cuii_domains_json",
-    "updated_at": "2026-08-02T12:18:25.857319Z"
+    "updated_at": "2026-08-02T18:16:59.475769Z"
   }
 }
