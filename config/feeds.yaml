@@ -3,7 +3,8 @@ defaults:
   snapshots_dir: ../feeds/upstream
   flat_result_dir: ../feeds/result
   compact: true
-  allow_extra_addresses: 16
+  # Compact only exact coverage; never block neighbouring addresses absent from feeds.
+  allow_extra_addresses: 0
   cover_prefix_v4: 24
   bundle_max_bytes: 4095
 
@@ -129,7 +130,7 @@ targets:
       - ipv6
     optimize: balanced
     compact: true
-    allow_extra_addresses: 16
+    allow_extra_addresses: 0
     cover_prefix_v4: 24
     bundle_max_bytes: 4095
     address_list: malware
