@@ -1,2 +1,2 @@
 # source_id	content_file	snapshot_hash	updated_at	resolved_location
-cuii_domains_json	cuii_domains_json-d5f3cfda559f8f836ee10c0df7cf20f12fcd17ac213c2fc211dbc0158413d8de.txt	d5f3cfda559f8f836ee10c0df7cf20f12fcd17ac213c2fc211dbc0158413d8de	2026-10-28T12:01:41.602574Z	https://api.cuiiliste.de/blocked_domains
+cuii_domains_json	cuii_domains_json-a93753653570314f2367c1e31b24c9ba1fe55c0c9802bb250d3f79c08a03e1b0.txt	a93753653570314f2367c1e31b24c9ba1fe55c0c9802bb250d3f79c08a03e1b0	2026-10-28T18:01:48.405059Z	https://api.cuiiliste.de/blocked_domains
