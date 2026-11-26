@@ -4,90 +4,90 @@
     "resolved_location": "https://iplists.firehol.org/files/c2_tracker.ipset",
     "snapshot_hash": "34d3bbbac90011f04b1021e3565f8476c6d010206860f95e62ffbc953cd1d368",
     "source_id": "c2_tracker",
-    "updated_at": "2026-11-25T18:07:09.027443Z"
+    "updated_at": "2026-11-26T00:16:11.619405Z"
   },
   "cta_cryptowall": {
     "content_path": "content/cta_cryptowall-6880eae56bffce5fe86fab43ef7f6317929ca9db664b052012e8ca4d2602a230.txt",
     "resolved_location": "https://iplists.firehol.org/files/cta_cryptowall.ipset",
     "snapshot_hash": "6880eae56bffce5fe86fab43ef7f6317929ca9db664b052012e8ca4d2602a230",
     "source_id": "cta_cryptowall",
-    "updated_at": "2026-11-25T18:07:09.878602Z"
+    "updated_at": "2026-11-26T00:16:11.884533Z"
   },
   "cybercrime": {
     "content_path": "content/cybercrime-38cf581aefd67fb89822d98c68c99c9dfd80e56571afc9b1255905e9a0300503.txt",
     "resolved_location": "https://iplists.firehol.org/files/cybercrime.ipset",
     "snapshot_hash": "38cf581aefd67fb89822d98c68c99c9dfd80e56571afc9b1255905e9a0300503",
     "source_id": "cybercrime",
-    "updated_at": "2026-11-25T18:07:08.511562Z"
+    "updated_at": "2026-11-26T00:16:11.289833Z"
   },
   "feodo": {
     "content_path": "content/feodo-9b99b90eacbf0b382f31e65a310b446529eb9a004e4680f29b3830fd417d8d6c.txt",
     "resolved_location": "https://iplists.firehol.org/files/feodo.ipset",
     "snapshot_hash": "9b99b90eacbf0b382f31e65a310b446529eb9a004e4680f29b3830fd417d8d6c",
     "source_id": "feodo",
-    "updated_at": "2026-11-25T18:07:10.254491Z"
+    "updated_at": "2026-11-26T00:16:12.076737Z"
   },
   "feodo_badips": {
     "content_path": "content/feodo_badips-9a36e885724e96aca2a00587a46883d52adea0688c59e4452f8e80cf80928388.txt",
     "resolved_location": "https://iplists.firehol.org/files/feodo_badips.ipset",
     "snapshot_hash": "9a36e885724e96aca2a00587a46883d52adea0688c59e4452f8e80cf80928388",
     "source_id": "feodo_badips",
-    "updated_at": "2026-11-25T18:07:10.745217Z"
+    "updated_at": "2026-11-26T00:16:12.260275Z"
   },
   "firehol_webclient": {
     "content_path": "content/firehol_webclient-9995a2061f0a92df1a6674c79c85751ba3da8bfff63161776590ff8906699807.txt",
     "resolved_location": "https://iplists.firehol.org/files/firehol_webclient.netset",
     "snapshot_hash": "9995a2061f0a92df1a6674c79c85751ba3da8bfff63161776590ff8906699807",
     "source_id": "firehol_webclient",
-    "updated_at": "2026-11-25T18:07:09.316763Z"
+    "updated_at": "2026-11-26T00:16:11.665889Z"
   },
   "iblocklist_abuse_palevo": {
     "content_path": "content/iblocklist_abuse_palevo-83c750abd8a667265dbdd30ebec6a4cfa7796a3c42e92b0f2d3e2196ef4c2ac8.txt",
     "resolved_location": "https://iplists.firehol.org/files/iblocklist_abuse_palevo.netset",
     "snapshot_hash": "83c750abd8a667265dbdd30ebec6a4cfa7796a3c42e92b0f2d3e2196ef4c2ac8",
     "source_id": "iblocklist_abuse_palevo",
-    "updated_at": "2026-11-25T18:07:11.942566Z"
+    "updated_at": "2026-11-26T00:16:12.895355Z"
   },
   "iblocklist_abuse_spyeye": {
     "content_path": "content/iblocklist_abuse_spyeye-f8adfe70447c26f0e8f02cc02d243d39f9a621433666b359003ae46dc7609f4e.txt",
     "resolved_location": "https://iplists.firehol.org/files/iblocklist_abuse_spyeye.netset",
     "snapshot_hash": "f8adfe70447c26f0e8f02cc02d243d39f9a621433666b359003ae46dc7609f4e",
     "source_id": "iblocklist_abuse_spyeye",
-    "updated_at": "2026-11-25T18:07:11.213890Z"
+    "updated_at": "2026-11-26T00:16:12.461609Z"
   },
   "iblocklist_abuse_zeus": {
     "content_path": "content/iblocklist_abuse_zeus-42ad299d851cbb33626ee563ed474f26d3f97818dfe4b295505c75e47223af32.txt",
     "resolved_location": "https://iplists.firehol.org/files/iblocklist_abuse_zeus.netset",
     "snapshot_hash": "42ad299d851cbb33626ee563ed474f26d3f97818dfe4b295505c75e47223af32",
     "source_id": "iblocklist_abuse_zeus",
-    "updated_at": "2026-11-25T18:07:11.647209Z"
+    "updated_at": "2026-11-26T00:16:12.682630Z"
   },
   "iblocklist_malc0de": {
     "content_path": "content/iblocklist_malc0de-1d0ffd461f3110ca9dc211dd3bb3aa03e4f0047a801bbdcca57f4b31656d8844.txt",
     "resolved_location": "https://iplists.firehol.org/files/iblocklist_malc0de.netset",
     "snapshot_hash": "1d0ffd461f3110ca9dc211dd3bb3aa03e4f0047a801bbdcca57f4b31656d8844",
     "source_id": "iblocklist_malc0de",
-    "updated_at": "2026-11-25T18:07:12.308712Z"
+    "updated_at": "2026-11-26T00:16:13.086685Z"
   },
   "private_special": {
     "content_path": "content/private_special-944334239dc81dbd53f9e9a8ce2da49e1e1bda60f298644f631b5248132b5514.txt",
     "resolved_location": "/work/feeds/manual/whitelists/whitelist-private-and-special.netset",
     "snapshot_hash": "944334239dc81dbd53f9e9a8ce2da49e1e1bda60f298644f631b5248132b5514",
     "source_id": "private_special",
-    "updated_at": "2026-11-25T18:07:12.908376Z"
+    "updated_at": "2026-11-26T00:16:13.283107Z"
   },
   "vxvault": {
     "content_path": "content/vxvault-e888547656fda0e6c8fb5144a66da7af7971100df36caf1c6cf3089875351a4f.txt",
     "resolved_location": "https://iplists.firehol.org/files/vxvault.ipset",
     "snapshot_hash": "e888547656fda0e6c8fb5144a66da7af7971100df36caf1c6cf3089875351a4f",
     "source_id": "vxvault",
-    "updated_at": "2026-11-25T18:07:12.907305Z"
+    "updated_at": "2026-11-26T00:16:13.282582Z"
   },
   "whitelist_overrides": {
     "content_path": "content/whitelist_overrides-aea576b1a48389f93a0d83c63c7294c26894297fedc3fa3f3f21b3da45495df8.txt",
     "resolved_location": "/work/feeds/manual/whitelists/whitelist-overrides.netset",
     "snapshot_hash": "aea576b1a48389f93a0d83c63c7294c26894297fedc3fa3f3f21b3da45495df8",
     "source_id": "whitelist_overrides",
-    "updated_at": "2026-11-25T18:07:12.909178Z"
+    "updated_at": "2026-11-26T00:16:13.283522Z"
   }
 }
